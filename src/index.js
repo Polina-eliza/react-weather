@@ -11,8 +11,8 @@ root.render(
     <div className="layout__container">
       <Sidebar />
       <Main />
-      <Author />
     </div>
+    <div><Author /></div>
   </React.StrictMode>
 );
 
