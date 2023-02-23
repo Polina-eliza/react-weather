@@ -1,18 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import Sidebar from "./Sidebar";
-import Main from "./Main";
 import Author from "./Author";
+import Weather from "./Weather";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <div className="layout__container">
-      <Sidebar />
-      <Main />
-    </div>
-    <div><Author /></div>
+  <Weather />
+  <Author />
   </React.StrictMode>
 );
 
