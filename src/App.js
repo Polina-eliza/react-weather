@@ -57,7 +57,7 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div className="layout__container">
       <SearchForm
         city={city}
         onCityChange={handleCityChange}

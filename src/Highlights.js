@@ -1,4 +1,5 @@
 import React from "react";
+import "./Highlights.css";
 
 function Highlights(props) {
   const { weatherData } = props;
