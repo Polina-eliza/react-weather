@@ -1,0 +1,12 @@
+.author {
+    font-weight: 600;
+    font-size: 13px;
+    text-align: center;
+    margin-top: 20px;
+    color: var(--accent-font-color);
+  }
+  
+  .author__link {
+    color: var(--sidebar-color);
+  }
+  

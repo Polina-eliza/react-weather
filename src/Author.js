@@ -1,17 +1,14 @@
 import React from 'react';
+import './Author.css';
 
-const Author = ({ name, link }) => {
-  return (
-    <div className="author">
-      <a className="author__link" href={link}>
-        Open Source Code
-      </a>
-      {' by '}
-      {name}
-      {' '}
-      <span role="img" aria-label="wave">👋</span>
-    </div>
-  );
-};
+const Author = () => (
+  <div className="author">
+    <a className="author__link" href="https://github.com/Polina-eliza">
+      Open Source Code
+    </a>{" "}
+    by Polina 👋
+  </div>
+);
+
 
 export default Author;
