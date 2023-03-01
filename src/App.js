@@ -4,6 +4,7 @@ import WeatherInfo from "./WeatherInfo";
 import WeekForecast from "./WeekForecast";
 import Highlights from "./Highlights";
 import AuthorInfo from "./AuthorInfo";
+import WeatherForecastDay from "./WeatherForecastDay";
 import "./App.css";
 
 function App() {
