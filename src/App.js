@@ -12,26 +12,27 @@ export default function App(props) {
   const [weatherData, setWeatherData] = useState({ ready: false });
   const [city, setCity] = useState("Rome");
 
-  const search = useCallback(() => {
-    const apiKey = "6d48t90aao34607b488607a8df81d2bd";
-    let apiUrl = `https://api.shecodes.io/weather/v1/forecast?q=${city}&key=${apiKey}&units=metric`;
+  function search() {
+    const apiKey = "bd79ao40tde3dec118ca46bc3e6dd55f";
+    let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}`;
+    console.log(apiUrl);
     axios.get(apiUrl).then(handleResponse);
-  }, [city]);
+  }
 
   function handleResponse(response) {
     setWeatherData({
       ready: true,
+      coordinates: response.data.coordinates,
       city: response.data.name,
-      temperature: response.data.main.temp,
-      feelsLike: `Feels like: ${response.data.main.feels_like}°C`,
-      humidity: response.data.main.humidity,
+      temperature: response.data.temperature.current,
+      feelsLike: `Feels like: ${response.data.temperature.feels_like}°C`,
+      humidity: response.data.temperature.humidity,
       wind: response.data.wind.speed,
       visibility: response.data.visibility / 1000,
-      pressure: response.data.main.pressure,
-      description: response.data.weather[0].description,
-      icon: response.data.weather[0].icon,
-      date: new Date(),
-    })
+      description: response.data.condition.description,
+      icon: response.data.condition.icon,
+      date: new Date(response.data.time * 1000),
+    });
   }
 
   function handleSubmit(event) {
