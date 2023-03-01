@@ -9,7 +9,7 @@ function SearchForm({ city, handleCityChange, handleSubmit }) {
         type="text"
         name="searchQueryInput"
         placeholder="Search for places"
-        value={city}
+        defaultValue={city}
         onChange={handleCityChange}
       />
       <button id="searchQuerySubmit" type="submit" name="searchQuerySubmit">

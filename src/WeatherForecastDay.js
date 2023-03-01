@@ -1,20 +1,34 @@
 import React from "react";
+import WeatherIcon from "./WeatherIcon";
 import "./WeatherForecastDay.css"
 
-function WeatherForecastDay(props) {
-  const { data } = props;
+export default function WeatherForecastDay(props) {
+  function maxTemperature() {
+    let temperature = Math.round(props.data.temp.max);
+    return `${temperature}°`;
+  }
 
-  const formatDay = (timestamp) => {
-    // Implement formatDay function logic here
+  function minTemperature() {
+    let temperature = Math.round(props.data.temp.min);
+    return `${temperature}°`;
+  }
+
+  function day() {
+    let date = new Date(props.data.dt * 1000);
+    let day = date.getDay();
+
+    let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+    return days[day];
   }
 
   return (
     <div className="day__wrapper">
       <div className="day">{formatDay(data.time)}</div>
-      <img className="week__img" src={`http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${data.condition.icon}.png`} alt="" />
+      <WeatherIcon code={props.data.weather[0].icon} size={36} />
       <div className="degrees">
-        <span className="degrees__max">{Math.round(data.temperature.maximum)}°/</span>
-        <span className="degrees__min">{Math.round(data.temperature.minimum)}°</span>
+        <span className="degrees__max"> {maxTemperature()}°/</span>
+        <span className="degrees__min"> {minTemperature()}°</span>
       </div>
     </div>
   );

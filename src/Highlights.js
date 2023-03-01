@@ -9,25 +9,25 @@ function Highlights(props) {
       <div className="highlights__wrapper">
         <div className="highlights__subheading">Wind speed</div>
         <div className="highlights__body" id="Wind">
-          {weatherData.wind} km/h
+          {props.data.wind} km/h
         </div>
       </div>
       <div className="highlights__wrapper">
         <div className="highlights__subheading">Humidity</div>
         <div className="highlights__body" id="Humidity">
-          {weatherData.humidity}%
+          {props.dat.humidity}%
         </div>
       </div>
       <div className="highlights__wrapper">
         <div className="highlights__subheading">Visibility</div>
         <div className="highlights__body" id="Visibility">
-          {weatherData.visibility} km
+          {props.dat.visibility} km
         </div>
       </div>
       <div className="highlights__wrapper">
         <div className="highlights__subheading">Pressure</div>
         <div className="highlights__body" id="Pressure">
-          {weatherData.pressure}
+          {props.data.pressure}
         </div>
       </div>
     </div>

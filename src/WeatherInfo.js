@@ -39,7 +39,7 @@ function WeatherInfo(props) {
       </div>
       <hr />
       <h1 className="main__temperature" id="temperature">
-        {Math.round(weatherData.temperature)}°C
+        {Math.round(props.celsius)}°C
       </h1>
       <div className="sidebar__subheading" id="feels-like">
         {weatherData.feelsLike}
