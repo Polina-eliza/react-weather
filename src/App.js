@@ -1,10 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import SearchForm from "./SearchForm";
 import WeatherInfo from "./WeatherInfo";
 import WeekForecast from "./WeekForecast";
 import Highlights from "./Highlights";
 import AuthorInfo from "./AuthorInfo";
-import WeatherForecastDay from "./WeatherForecastDay";
 import axios from 'axios';
 import "./App.css";
 
@@ -13,18 +12,24 @@ export default function App(props) {
   const [weatherData, setWeatherData] = useState({ ready: false });
   const [city, setCity] = useState("Rome");
 
+  const search = useCallback(() => {
+    const apiKey = "6d48t90aao34607b488607a8df81d2bd";
+    let apiUrl = `https://api.shecodes.io/weather/v1/forecast?q=${city}&key=${apiKey}&units=metric`;
+    axios.get(apiUrl).then(handleResponse);
+  }, [city]);
+
   function handleResponse(response) {
     setWeatherData({
       ready: true,
-      city: data.name,
-      temperature: data.main.temp,
-      feelsLike: `Feels like: ${data.main.feels_like}°C`,
-      humidity: data.main.humidity,
-      wind: data.wind.speed,
-      visibility: data.visibility / 1000,
-      pressure: data.main.pressure,
-      description: data.weather[0].description,
-      icon: data.weather[0].icon,
+      city: response.data.name,
+      temperature: response.data.main.temp,
+      feelsLike: `Feels like: ${response.data.main.feels_like}°C`,
+      humidity: response.data.main.humidity,
+      wind: response.data.wind.speed,
+      visibility: response.data.visibility / 1000,
+      pressure: response.data.main.pressure,
+      description: response.data.weather[0].description,
+      icon: response.data.weather[0].icon,
       date: new Date(),
     })
   }
@@ -38,12 +43,9 @@ export default function App(props) {
     setCity(event.target.value);
   }
 
-
-    function search() {
-    const apiKey = "6d48t90aao34607b488607a8df81d2bd";
-    let apiUrl = `https://api.shecodes.io/weather/v1/forecast?lon=${lon}&lat=${lat}&key=${apiKey}&units=metric`;
-    axios.get(apiUrl).then(handleResponse);
-  }
+  useEffect(() => {
+    search();
+  }, [search]);
 
   if (weatherData.ready) {
     return (
@@ -64,10 +66,6 @@ export default function App(props) {
       </div>
     );
   } else {
-    search();
     return "Loading..."
   }
 }
-  
- 
-
