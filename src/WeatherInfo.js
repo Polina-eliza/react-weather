@@ -31,11 +31,11 @@ function WeatherInfo(props) {
   return (
     <div className="sidebar">
       <div className="sidebar__container">
-        <SearchForm
-          city={city}
-          onCityChange={onCityChange}
-          onSubmit={onSubmit}
-        />
+      <SearchForm
+  city={city}
+  handleCityChange={onCityChange}
+  handleSubmit={onSubmit}
+/>
         <img
           className="main__img"
           id="icon"
