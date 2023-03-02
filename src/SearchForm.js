@@ -1,6 +1,7 @@
 import React from 'react';
 import "./SearchForm.css";
 
+
 function SearchForm({ city, handleCityChange, handleSubmit }) {
   return (
     <form className="input__form" id="search-form" onSubmit={handleSubmit}>

@@ -1,12 +1,11 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState } from "react";
 import SearchForm from "./SearchForm";
 import WeatherInfo from "./WeatherInfo";
 import WeekForecast from "./WeekForecast";
 import Highlights from "./Highlights";
 import AuthorInfo from "./AuthorInfo";
-import axios from 'axios';
+import axios from "axios";
 import "./App.css";
-
 
 export default function App(props) {
   const [weatherData, setWeatherData] = useState({ ready: false });
@@ -44,29 +43,20 @@ export default function App(props) {
     setCity(event.target.value);
   }
 
-  useEffect(() => {
-    search();
-  }, [search]);
-
   if (weatherData.ready) {
     return (
       <div className="layout__container">
-        <SearchForm
-          city={city}
-          onCityChange={handleCityChange}
-          onSubmit={handleSubmit}
-        />
         {weatherData && (
           <>
             <WeatherInfo weatherData={weatherData} />
-            <WeekForecast city={city} />
-            <Highlights weatherData={weatherData} />
+            <WeekForecast coordinates={weatherData.coordinates} />
           </>
         )}
         <AuthorInfo />
       </div>
     );
   } else {
-    return "Loading..."
+    search();
+    return "Loading...";
   }
 }

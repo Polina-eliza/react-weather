@@ -1,10 +1,13 @@
 import React from "react";
 import "./Highlights.css";
 
+
 function Highlights(props) {
   const { weatherData } = props;
 
   return (
+    <div className="highlights">
+    <div className="today__subheading">Today's Highlights</div>
     <div className="highlight__container">
       <div className="highlights__wrapper">
         <div className="highlights__subheading">Wind speed</div>
@@ -30,6 +33,7 @@ function Highlights(props) {
           {weatherData.pressure}
         </div>
       </div>
+    </div>
     </div>
   );
 }
