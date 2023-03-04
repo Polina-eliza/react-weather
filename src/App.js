@@ -1,5 +1,4 @@
 import { useState } from "react";
-import SearchForm from "./SearchForm";
 import WeatherInfo from "./WeatherInfo";
 import WeekForecast from "./WeekForecast";
 import Highlights from "./Highlights";
@@ -46,7 +45,22 @@ export default function App(props) {
   if (weatherData.ready) {
     return (
       <div className="layout__container">
-        <SearchForm city={city} handleCityChange={handleCityChange} handleSubmit={handleSubmit} />
+        <form className="input__form" id="search-form" onSubmit={handleSubmit}>
+          <input
+            id="searchQueryInput"
+            type="text"
+            name="searchQueryInput"
+            placeholder="Search for places"
+            defaultValue={city}
+            onChange={handleCityChange}
+          />
+          <button id="searchQuerySubmit" type="submit" name="searchQuerySubmit">
+            <div className="input__img">🔍</div>
+          </button>
+          <button className="btn__location" id="button-location">
+            <div className="location__img">📍</div>
+          </button>
+        </form>
         {weatherData && (
           <>
             <WeatherInfo weatherData={weatherData} />

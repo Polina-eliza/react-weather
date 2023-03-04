@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "./SearchForm.css";
 
+function SearchForm(props) {
+  const [city, setCity] = useState("");
 
-function SearchForm({ city, handleCityChange, handleSubmit }) {
+  function handleSubmit(event) {
+    event.preventDefault();
+    props.onSearch(city);
+  }
+
+  function handleCityChange(event) {
+    setCity(event.target.value);
+  }
+
   return (
     <form className="input__form" id="search-form" onSubmit={handleSubmit}>
       <input
@@ -10,7 +20,7 @@ function SearchForm({ city, handleCityChange, handleSubmit }) {
         type="text"
         name="searchQueryInput"
         placeholder="Search for places"
-        defaultValue={city}
+        value={city}
         onChange={handleCityChange}
       />
       <button id="searchQuerySubmit" type="submit" name="searchQuerySubmit">
