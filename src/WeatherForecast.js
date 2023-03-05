@@ -1,44 +1,51 @@
-import React from "react";
-import WeatherIcon from "./WeatherIcon";
-import "./WeatherForecastDay.css";
+import React, { useState, useEffect } from "react";
+import "./WeatherForecast.css";
+import axios from "axios";
+import WeatherForecastDay from "./WeatherForecastDay";
 
+export default function WeatherForecast(props) {
+  let [loaded, setLoaded] = useState(false);
+  let [forecast, setForecast] = useState(null);
 
-export default function WeatherForecastDay(props) {
-  function maxTemperature() {
-    let temperature = showTemperature(props.data.temperature.maximum);
-    return `${temperature}°`;
+  useEffect(() => {
+    setLoaded(false);
+  }, [props.coordinates]);
+
+  function handleResponse(response) {
+    setForecast(response.data.daily);
+    setLoaded(true);
   }
 
-  function minTemperature() {
-    let temperature = showTemperature(props.data.temperature.minimum);
-    return `${temperature}°`;
+  function load() {
+    let apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
+    let longitude = props.coordinates.lon;
+    let latitude = props.coordinates.lat;
+    let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
+
+    axios.get(apiUrl).then(handleResponse);
   }
 
-  function day() {
-    let date = new Date(props.data.dt * 1000);
-    let day = date.getDay();
-
-    let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-
-    return days[day];
-  }
-
-  function showTemperature(temperature) {
-    if (props.unit === "celsius") {
-      return Math.round(temperature);
-    } else {
-      return Math.round((temperature * 9) / 5 + 32);
-    }
-  }
-
-  return (
-    <div className="day__wrapper">
-      <div className="day">{day()}</div>
-      <WeatherIcon code={props.data.condition.icon} size={36} />
-      <div className="degrees">
-        <span className="degrees__max"> {maxTemperature()}/</span>
-        <span className="degrees__min"> {minTemperature()}</span>
+  if (loaded) {
+    return (
+      <div className="WeatherForecast">
+        <div className="row">
+          {forecast.map(function (dailyForecast, index) {
+            if (index < 5) {
+              return (
+                <div className="col" key={index}>
+                  <WeatherForecastDay data={dailyForecast} />
+                </div>
+              );
+            } else {
+              return null;
+            }
+          })}
+        </div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    load();
+
+    return null;
+  }
 }

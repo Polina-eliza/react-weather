@@ -1,32 +1,11 @@
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
+
+
+.App {
+  max-width: 600px;
+  margin: 30px auto;
 }
 
-:root {
-  --body-color: #f3f1f1;
-  --sidebar-color: #4f96d9;
-  --main-color: #fffff;
-  --background-color: #d9d9d9;
-  --main-font-color: #ffffff;
-  --accent-font-color: #0f0f10;
-}
-
-body {
-  font-family: "Poppins", Arial, Helvetica, sans-serif;
-  color: var(--main-font-color);
-  font-size: 12px;
-  line-height: 16px;
-  background-color: var(--background-color);
-}
-
-a {
-  text-decoration: none;
-}
-
-.layout__container {
-  display: flex;
-  justify-content: center;
-  margin-top: 60px;
+.App footer {
+  font-size: 11px;
+  margin: 10px 0;
 }

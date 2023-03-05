@@ -1,71 +1,37 @@
-import React, { useEffect } from "react";
-import SearchForm from "./SearchForm";
-import "./WeatherInfo.css";
+import React from "react";
+import FormattedDate from "./FormattedDate";
+import WeatherIcon from "./WeatherIcon";
+import WeatherTemperature from "./WeatherTemperature";
 
-function WeatherInfo(props) {
-  const { weatherData, onCityChange, onSubmit, city } = props;
-
-  useEffect(() => {
-    let now = new Date();
-    let currentDay = document.querySelector(".current__day");
-    let currentTime = document.querySelector(".current__time");
-
-    let days = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-    ];
-    let day = days[now.getDay()];
-
-    let hours = now.getHours();
-    let minutes = now.getMinutes().toString().padStart(2, "0");
-
-    currentDay.innerHTML = `${day},`;
-    currentTime.innerHTML = `${hours}:${minutes}`;
-  }, []);
-
+export default function WeatherInfo(props) {
   return (
-    <div className="sidebar">
-      <div className="sidebar__container">
-      <SearchForm
-    city={city}
-    handleCityChange={onCityChange}
-    handleSubmit={onSubmit}
-  />
-  <img
-    className="main__img"
-    id="icon"
-    src={`http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${weatherData.icon}.png`}
-    alt={weatherData.description}
-  />
-        <h2 className="weather__descr" id="description">
-          {weatherData.description}
-        </h2>
-        <h2 className="main__city" id="city">
-          {weatherData.city}
-        </h2>
-        <div className="current__data">
-          <p className="current__day">
-            {weatherData.date.toLocaleDateString("en-US", { weekday: "long" })},
-          </p>
-          <p className="current__time">
-            {weatherData.date.toLocaleTimeString("en-US")}
-          </p>
+    <div className="WeatherInfo">
+      <h1>{props.data.city}</h1>
+      <ul>
+        <li>
+          <FormattedDate date={props.data.date} />
+        </li>
+        <li className="text-capitalize">{props.data.description}</li>
+      </ul>
+      <div className="row mt-3">
+        <div className="col-6">
+          <div className="d-flex">
+            <div>
+              <WeatherIcon code={props.data.icon} size={52} />
+            </div>
+
+            <div>
+              <WeatherTemperature celsius={props.data.temperature} />
+            </div>
+          </div>
         </div>
-        <hr />
-        <h1 className="main__temperature" id="temperature">
-          {Math.round(weatherData.temperature)}°C
-        </h1>
-        <div className="sidebar__subheading" id="feels-like">
-          {weatherData.feelsLike}
+        <div className="col-6">
+          <ul>
+            <li>Humidity: {props.data.humidity}%</li>
+            <li>Wind: {props.data.wind} km/h</li>
+          </ul>
         </div>
       </div>
     </div>
   );
 }
-
-export default WeatherInfo;
